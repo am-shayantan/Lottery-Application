@@ -16,6 +16,10 @@ contract Lottery {
     function random() private view returns (uint) {
         return uint(keccak256(block.difficulty, now, players));
     }
+
+    function getAccountBalance() public restricted() returns (uint) {
+        return uint(address(this).balance);
+    }
     
     function pickWinner() public restricted {
         uint index = random() % players.length;
